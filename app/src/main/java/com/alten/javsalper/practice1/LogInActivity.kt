@@ -17,14 +17,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 
-class MainActivity : AppCompatActivity() {
+class LogInActivity : AppCompatActivity() {
 
     lateinit var users: MutableList<User>
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         initializeUsers()
         val switch1 = findViewById<Switch>(R.id.mainActivitySwitchRemember)
@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
             val userActually =
                 listUsur.find { it.email == email && it.password == password }
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LogInActivity::class.java)
             intent.putExtra("listUsur1", ArrayList(listUsur))
             intent.putExtra("userActually", userActually)
             intent.putExtra("safe", password)
