@@ -11,54 +11,50 @@ import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Switch
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var users: MutableList<User>
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val switch1 = findViewById<Switch>(R.id.switch1)
-        val button = findViewById<Button>(R.id.button)
+        initializeUsers()
+        val switch1 = findViewById<Switch>(R.id.mainActivitySwitchRemember)
+        val button = findViewById<Button>(R.id.mainActivityBtnRemember)
         switch1.setOnCheckedChangeListener { _, isChecked ->
             button.isEnabled = isChecked
         }
 
-        val emailEditText: EditText = findViewById(R.id.editTextTextEmailAddress)
-        val passwordEditText: EditText = findViewById(R.id.editTextTextPassword)
-        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        val emailInput: TextInputLayout = findViewById(R.id.mainActivityInputEmail)
+        val passwordInput: TextInputLayout = findViewById(R.id.mainActivityInputPassword)
+        val progressBar: ProgressBar = findViewById(R.id.mainActivityProgressIndicator1Secound)
 
-        emailEditText.requestFocus()
-        emailEditText.setOnEditorActionListener { _, actionId, _ ->
+        emailInput.requestFocus()
+        emailInput.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                passwordEditText.requestFocus()
+                passwordInput.requestFocus()
                 true
             } else {
                 false
             }
         }
-        emailEditText.isFocusableInTouchMode = true
-        emailEditText.nextFocusDownId = passwordEditText.id
+        emailInput.isFocusableInTouchMode = true
+        emailInput.nextFocusDownId = passwordInput.id
 
-        fun isValidEmail(email: String): Boolean {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        }
 
-        fun validatePassword(password: String): Boolean {
-            val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,8}$")
-            return regex.matches(password)
-        }
-
-        emailEditText.addTextChangedListener(object : TextWatcher {
+        emailInput.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val email = s.toString()
                 val isEmailValid = isValidEmail(email)
-                val isPasswordValid = validatePassword(passwordEditText.text.toString())
+                val isPasswordValid = isValidPassword(passwordInput.editText?.text.toString())
                 button.isEnabled = isEmailValid && isPasswordValid
             }
 
@@ -66,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        passwordInput.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 button.performClick()
                 true
@@ -75,11 +71,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        passwordEditText.addTextChangedListener(object : TextWatcher {
+        passwordInput.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val password = s.toString()
-                val isPasswordValid = validatePassword(password)
-                val isEmailValid = isValidEmail(emailEditText.text.toString())
+                val isPasswordValid = isValidPassword(password)
+                val isEmailValid = isValidEmail(emailInput.editText?.text.toString())
                 button.isEnabled = isEmailValid && isPasswordValid
             }
 
@@ -97,18 +93,21 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
 
                 // Check if the email and password are correct
-                val email = emailEditText.text.toString()
-                val password = passwordEditText.text.toString()
-                if (email == "example@gmail.com" && password == "Password1") {
+                val email = emailInput.editText?.text.toString()
+                val password = passwordInput.editText?.text.toString()
+                if (isValidEmail(email) && isValidPassword(password)) {
                     // Go to the welcome screen
-                  //  val intent = Intent(this, WelcomeActivity::class.java)
+                    val intent = Intent(
+                        this,
+                        WelcomeActivity::class.java
+                    ) //pasar los argumentos por parametro
                     startActivity(intent)
                     finish()
                 } else {
                     // Show an error message
                     val errorMessage = if (!isValidEmail(email)) {
                         "Email is invalid"
-                    } else if (!validatePassword(password)) {
+                    } else if (!isValidPassword(password)) {
                         "Password is invalid"
                     } else {
                         "Email or password is incorrect"
@@ -125,5 +124,70 @@ class MainActivity : AppCompatActivity() {
             }, 1000)
         }
     }
+    fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,8}$")
+        return regex.matches(password)
+    }
+
+    fun initializeUsers() {
+        users = mutableListOf()
+        val user1 = User(
+            "juanjo9@gmail,com",
+            "Star90",
+            "Juanjo",
+            "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b826e129797915.560414c48512e.jpg"
+        )
+        val user2 = User(
+            "elena65@gmail.com",
+            "Elen65",
+            "Helena",
+            "https://static.wikia.nocookie.net/esstarwars/images/9/9b/Princessleiaheadwithgun.jpg/revision/latest?cb=20150117214124"
+        )
+        val user3 = User(
+            "Paco12@gmail.com",
+            "Paco12",
+            "Paco",
+            "https://us.123rf.com/450wm/jemastock/jemastock1608/jemastock160802715/60756136-hombre-dise%C3%B1o-plano-usando-el-tel%C3%A9fono-celular-de-la-ilustraci%C3%B3n-del-vector-del-icono.jpg"
+        )
+        val user4 = User(
+            "Jessica",
+            "Jess92",
+            "Jessica",
+            "https://www.facebook.com/photo/?fbid=2101305979880267&set=ecnf.100000026550482"
+        )
+        users.add(user1)
+        users.add(user2)
+        users.add(user3)
+        users.add(user4)
+    }
+
+    fun verifyCredential(
+        email: String,
+        password: String,
+        listUsur: MutableList<User>
+    ): Boolean {
+        val usuario = listUsur.find { it.email == email && it.password == password }
+        if (usuario != null) {
+            val userActually =
+                listUsur.find { it.email == email && it.password == password }
+
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("listUsur1", ArrayList(listUsur))
+            intent.putExtra("userActually", userActually)
+            intent.putExtra("safe", password)
+
+            if (userActually != null) {
+                intent.putExtra("urlPhoto", userActually.photo)
+            }
+            startActivity(intent)
+            return true
+        }
+        return false
+    }
+
 }
 
