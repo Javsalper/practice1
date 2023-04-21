@@ -27,14 +27,14 @@ class LogInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         initializeUsers()
-        val switch1 = findViewById<Switch>(R.id.mainActivitySwitchRemember)
-        val button = findViewById<Button>(R.id.mainActivityBtnRemember)
+        val switch1 = findViewById<Switch>(R.id.loginActivitySwitchRemember)
+        val button = findViewById<Button>(R.id.loginActivityBtnRemember)
         switch1.setOnCheckedChangeListener { _, isChecked ->
             button.isEnabled = isChecked
         }
 
-        val emailInput: TextInputLayout = findViewById(R.id.mainActivityInputEmail)
-        val passwordInput: TextInputLayout = findViewById(R.id.mainActivityInputPassword)
+        val emailInput: TextInputLayout = findViewById(R.id.loginActivityInputEmail)
+        val passwordInput: TextInputLayout = findViewById(R.id.loginActivityInputPassword)
         val progressBar: ProgressBar = findViewById(R.id.mainActivityProgressIndicator1Secound)
 
         emailInput.requestFocus()

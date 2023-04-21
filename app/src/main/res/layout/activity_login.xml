@@ -7,7 +7,7 @@
     tools:context=".LogInActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mainActivityLabelTitle"
+        android:id="@+id/loginActivityLabelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:title="Acceso"
@@ -31,14 +31,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mainActivityInputEmail"
+        android:id="@+id/loginActivityInputEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainActivityLabelTitle"
+        app:layout_constraintTop_toBottomOf="@id/loginActivityLabelTitle"
         app:endIconMode="password_toggle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
@@ -50,14 +50,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mainActivityInputPassword"
+        android:id="@+id/loginActivityInputPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainActivityInputEmail"
+        app:layout_constraintTop_toBottomOf="@id/loginActivityInputEmail"
         app:endIconMode="password_toggle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -70,7 +70,7 @@
 
 
     <Switch
-        android:id="@+id/mainActivitySwitchRemember"
+        android:id="@+id/loginActivitySwitchRemember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -79,10 +79,10 @@
         android:text="@string/recordar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainActivityInputPassword" />
+        app:layout_constraintTop_toBottomOf="@id/loginActivityInputPassword" />
 
     <Button
-        android:id="@+id/mainActivityBtnRemember"
+        android:id="@+id/loginActivityBtnRemember"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginHorizontal="24dp"
@@ -101,6 +101,6 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/mainActivityBtnRemember" />
+        app:layout_constraintBottom_toBottomOf="@+id/loginActivityBtnRemember" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
