@@ -37,7 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/welcomeActivityLabelUser_name"
+                android:id="@+id/welcomeActivityLabelUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="user_name"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toBottomOf="@id/welcomeActivityLabelTitle"/>
 
             <TextView
-                android:id="@+id/welcomeActivityLabelUser_email"
+                android:id="@+id/welcomeActivityLabelUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="user_email"
@@ -56,7 +56,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="welcomeActivityLabelUser_name"/>
+                app:layout_constraintTop_toBottomOf="welcomeActivityLabelUserName"/>
             <ImageView
                 android:id="@+id/imgWelcomeActivityUserView"
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 tools:srcCompat="@tools:sample/avatars"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/welcomeActivityLabelUser_email"/>
+                app:layout_constraintTop_toBottomOf="@id/welcomeActivityLabelUserEmail"/>
 
 
         </LinearLayout>

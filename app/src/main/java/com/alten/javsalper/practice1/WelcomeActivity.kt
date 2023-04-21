@@ -24,7 +24,7 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         nameTextView=findViewById(R.id.welcomeActivityLabelTitle)
-        emailTextView=findViewById(R.id.mainActivityInputEmail)
+        emailTextView=findViewById(R.id.welcomeActivityLabelUserEmail)
         profileImageView = findViewById(R.id.imgWelcomeActivityUserView)
         buttonLogOut=findViewById(R.id.welcomeActivityBtnLogOut)
 
